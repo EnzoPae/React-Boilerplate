@@ -1,0 +1,9 @@
+.sidebar {
+  width: 16rem;
+  height: 100vh;
+  transition: all 0.7s;
+  z-index: 1;
+}
+.sidebar.hide {
+  transform: translate(-16rem);
+}

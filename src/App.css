@@ -1,0 +1,15 @@
+.content {
+  transition: all 0.7s;
+}
+.content.sidebar-hide {
+  margin-left: -16rem;
+  transition: all 0.7s;
+}
+
+@media (max-width: 800px) {
+  .content {
+    transition: all 0.7s;
+    margin-left: -16rem;
+    z-index: 0;
+  }
+}
