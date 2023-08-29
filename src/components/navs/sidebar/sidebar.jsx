@@ -22,7 +22,7 @@ const Sidebar = ({
   };
   return (
     <div
-      className={`sidebar bg-primary-reverse ${
+      className={`sidebar bg-primary-reverse shadow-1 ${
         topbarToggle ? "hide" : sidebarToggle ? "hide" : ""
       }`}
     >

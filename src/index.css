@@ -27,3 +27,12 @@ body {
     padding: 0.2rem !important;
   }
 }
+
+@media (max-width: 500px) {
+  .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
+    padding: 0.5rem !important;
+  }
+  .p-menuitem-text .p-menuitem-icon {
+    font-size: 0.5rem !important;
+  }
+}
