@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import useScreenSize from "../../../hooks/useScreenSize";
 //Components
 import { Button } from "primereact/button";
+import Logo from "../../../assets/Logo_TyS.png";
 
 const Sidebar = ({
   topbarToggle,
@@ -29,9 +30,13 @@ const Sidebar = ({
       {/* HEADER */}
       <div className="w-full h-4rem flex justify-content-between align-items-center">
         <Link to={"/"} style={{ textDecoration: "none" }}>
-          <p className="mx-3 font-italic font-bold text-3xl text-primary">
-            Blanck
-          </p>
+          <img
+            src={Logo}
+            alt="logo"
+            width={45}
+            height={45}
+            className="ml-3 border-round-md"
+          />
         </Link>
         <div className="md:hidden">
           <Button

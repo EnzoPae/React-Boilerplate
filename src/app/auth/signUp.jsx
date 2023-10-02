@@ -1,20 +1,44 @@
+import { useRef } from "react";
 //Router
 import { Link } from "react-router-dom";
+//Hooks
+import { useAlerts } from "../../hooks/useAlerts";
 //Formik
 import { Formik, Form } from "formik";
 import { signUpSchema } from "./schema/authSchemas";
-import FormikInput from "../../components/formik/formikInput";
-import FormikPassword from "../../components/formik/formikPassword";
+import FormikInput from "../../components/forms/formikInput";
+import FormikPassword from "../../components/forms/formikPassword";
+import SendButton from "../../components/forms/sendButton";
 //Components
 import { Card } from "primereact/card";
-import { Button } from "primereact/button";
+import { Toast } from "primereact/toast";
 
 const SignUp = () => {
+  const toast = useRef(null);
+  const { showError, ref } = useAlerts();
+  const showToast = () => {
+    toast.current.show({
+      severity: "success",
+      summary: "Registro Exitoso",
+      detail: "Se ha enviado un link de verificación a su correo",
+      sticky: true,
+    });
+  };
   const initialValues = {
-    name: "",
     email: "",
     password: "",
-    repeatPassword: "",
+    confirmPassword: "",
+    name: "",
+    lastName: "",
+  };
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      console.log(values)
+      showToast();
+      resetForm();
+    } catch (error) {
+      showError(error);
+    }
   };
   return (
     <Card
@@ -22,35 +46,49 @@ const SignUp = () => {
       subTitle="Ingrese los siguientes datos para registrarse."
       className="col-12 md:col-10 lg:col-8 xl:col-6 m-auto"
     >
+      <Toast ref={ref} />
       <Formik
         enableReinitialize
         initialValues={initialValues}
         validationSchema={signUpSchema}
-        onSubmit={(x) => console.log(x)}
+        onSubmit={handleSubmit}
       >
-        {() => (
+        {({ isSubmitting }) => (
           <Form>
-            <FormikInput
-              name="name"
-              placeholder={"Ingresar nombre y apellido"}
-              label={"Nombre y Apellido"}
-            />
             <FormikInput
               name="email"
               placeholder={"Ingresar correo"}
               label={"Email"}
+              disabled={isSubmitting}
             />
+            <div className="sm:flex block">
+              <FormikInput
+                name="name"
+                placeholder={"Ingresar nombre"}
+                label={"Nombre"}
+                disabled={isSubmitting}
+              />
+              <div className="mx-1" />
+              <FormikInput
+                name="lastName"
+                placeholder={"Ingresar apellido"}
+                label={"Apellido"}
+                disabled={isSubmitting}
+              />
+            </div>
             <FormikPassword
               name="password"
               placeholder={"Ingresar contraseña"}
               label={"Contraseña"}
+              disabled={isSubmitting}
             />
             <FormikPassword
-              name="repeatPassword"
+              name="confirmPassword"
               placeholder={"Repetir contraseña"}
               label={"Repetir contraseña"}
+              disabled={isSubmitting}
             />
-            <Button label="Registrarse" className="mt-2" type="submit" />
+            <SendButton label="Registrarse" loading={isSubmitting} />
           </Form>
         )}
       </Formik>
@@ -60,6 +98,7 @@ const SignUp = () => {
           Ingresa
         </Link>
       </div>
+      <Toast ref={toast} />
     </Card>
   );
 };

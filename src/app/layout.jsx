@@ -7,13 +7,12 @@ import HomePage from "./utils/homePage";
 import SignIn from "./auth/signIn";
 import SignUp from "./auth/SignUP";
 //User Pages
-import { COMPONENTS_MAP } from "./routes/elements";
-import { filterRoutes } from "./routes/filterRoutes";
+import { COMPONENTS_MAP } from "./routes/components";
 
 const Layout = ({ auth, routes }) => {
-  const filteredRoutes = filterRoutes(routes);
-  const USER_ROUTES = filteredRoutes.map((r) => (
-    <Route key={r.id} path={r.path} element={COMPONENTS_MAP[r.element]} />
+  const filteredRoutes = routes.flatMap((cat) => cat.routes);
+  const USER_ROUTES = filteredRoutes.map((r, i) => (
+    <Route key={i} path={r.path} element={COMPONENTS_MAP[r.comp]} />
   ));
   return (
     <>

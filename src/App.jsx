@@ -8,7 +8,7 @@ import Topbar from "./components/navs/topbar/topbar";
 import Layout from "./app/layout";
 
 function App() {
-  const { auth, routes } = useAuth();
+  const { auth, routes, user } = useAuth();
   const [sidebarToggle, setSidebarToggle] = useState(false);
   return (
     <div className="flex">
@@ -25,6 +25,9 @@ function App() {
         }`}
       >
         <Topbar
+          auth={auth}
+          user={user}
+          routes={routes}
           sidebarToggle={sidebarToggle}
           setSidebarToggle={setSidebarToggle}
         />

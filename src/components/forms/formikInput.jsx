@@ -1,11 +1,12 @@
 import { useField } from "formik";
 import { InputText } from "primereact/inputtext";
+import Label from "./label";
 
-const FormikInput = ({ placeholder, label, disabled, ...props }) => {
+const FormikInput = ({ placeholder, label, tooltip, disabled, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <div className="my-2 flex-1">
-      <p className="font-semibold mb-1">{label}</p>
+      <Label label={label} tooltip={tooltip} />
       <InputText
         {...field}
         {...props}

@@ -6,46 +6,41 @@ const ItemsAuth = ({ routes, onClick }) => {
     return location.pathname === path;
   };
 
-  let content = [];
-  for (var key in routes) {
-    content.push(
-      <div key={key} className="pr-1">
-        <p className="py-2 pr-2 pl-3 text-primary font-bold select-none capitalize">
-          {key}
-        </p>
-        <ul>
-          {routes[key].map((r) => {
-            if (r.display) {
-              return (
-                <Link
-                  to={r.path ? r.path : "/"}
-                  key={r.id}
-                  style={{ textDecoration: "none" }}
-                  onClick={onClick}
+  return routes.map((category, i) => (
+    <div key={i} className="pr-1">
+      <p className="py-1 pr-2 pl-3 text-primary font-bold select-none capitalize">
+        {category.cat}
+      </p>
+      <ul>
+        {category.routes.map((r) => {
+          if (r.d) {
+            return (
+              <Link
+                to={r.path ? r.path : "/"}
+                key={`${r.path}`}
+                style={{ textDecoration: "none" }}
+                onClick={onClick}
+              >
+                <li
+                  className={`py-1 pr-1 pl-3 hover:bg-green-50 border-round-right ${
+                    isActive(r.path) ? "" : ""
+                  }`}
                 >
-                  <li
-                    className={`py-2 pr-1 pl-4 hover:bg-green-100 border-round-right ${
-                      isActive(r.path) ? "bg-green-100" : ""
-                    }`}
+                  <p
+                    className={`font-${
+                      isActive(r.path) ? "bold" : ""
+                    } select-none text-sm text-color`}
                   >
-                    <p
-                      className={`font-${
-                        isActive(r.path) ? "bold" : "medium"
-                      } select-none text-sm text-color`}
-                    >
-                      {r.desc}
-                    </p>
-                  </li>
-                </Link>
-              );
-            }
-          })}
-        </ul>
-      </div>
-    );
-  }
-
-  return content;
+                    {r.desc}
+                  </p>
+                </li>
+              </Link>
+            );
+          }
+        })}
+      </ul>
+    </div>
+  ));
 };
 
 export default ItemsAuth;

@@ -3,7 +3,7 @@ import { TabMenu } from "primereact/tabmenu";
 import { Card } from "primereact/card";
 
 const Tabs = ({ sections }) => {
-  const [activeTab, setActiveTab] = useState(sections[0].label);
+  const [activeTab, setActiveTab] = useState(sections[0].label);  
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleTabClick = (sectionName) => {

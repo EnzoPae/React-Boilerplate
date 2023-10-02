@@ -4,23 +4,24 @@ import { useEffect, useRef } from "react";
 import { useAuth } from "../../../context/authContext";
 //Hooks
 import useScreenSize from "../../../hooks/useScreenSize";
-import { filterRoutes } from "../../../app/routes/filterRoutes";
 import { useLocation } from "react-router-dom";
 //Components
 import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
 
-const Topbar = ({ sidebarToggle, setSidebarToggle }) => {
-  const { auth, user, routes, logout } = useAuth();
+const Topbar = ({ sidebarToggle, setSidebarToggle, auth, user, routes }) => {
+  const { logout } = useAuth();
   //current route
   const location = useLocation();
-  const filteredRoutes = filterRoutes(routes);
+  const filteredRoutes = routes.flatMap((cat) => cat.routes);
   const currentRoute = filteredRoutes.find((r) => r.path === location.pathname);
   const titleBar = () => {
     if (!auth || !currentRoute) {
       return "Terminales y Servicios";
     } else {
-      return `${currentRoute.category} / ${currentRoute.desc}`;
+      const cat =
+        user.role === "Empresa" ? user.company.Name : currentRoute.cat;
+      return `${cat} / ${currentRoute.desc}`;
     }
   };
   //items config button
@@ -55,12 +56,12 @@ const Topbar = ({ sidebarToggle, setSidebarToggle }) => {
       <div className="mr-2">
         {!auth ? null : (
           <div className="flex align-items-center">
-            <p className="hidden md:block mx-1 white-space-nowrap text-primary font-semibold select-none">
-              <i className="pi pi-user" /> {user}
+            <p className="hidden md:block mx-2 white-space-nowrap text-primary select-none">
+              <i className="pi pi-user" /> {`${user.surname} | ${user.role}`}
             </p>
             <Button
               icon="pi pi-cog"
-              onClick={(event) => menuConfig.current.toggle(event)}
+              onClick={(e) => menuConfig.current.toggle(e)}
               rounded
               text
             />

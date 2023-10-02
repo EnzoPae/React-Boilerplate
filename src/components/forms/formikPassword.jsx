@@ -1,12 +1,19 @@
 import { useField } from "formik";
 import { Password } from "primereact/password";
+import Label from "./label";
 
-const FormikPassword = ({ placeholder, label, disabled, ...props }) => {
+const FormikPassword = ({
+  placeholder,
+  label,
+  tooltip,
+  disabled,
+  ...props
+}) => {
   const [field, meta] = useField(props);
   //console.log(field)
   return (
     <div className="my-2 flex-1">
-      <p className="font-semibold mb-1">{label}</p>
+      <Label label={label} tooltip={tooltip} />
       <Password
         {...field}
         {...props}

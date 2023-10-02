@@ -1,52 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
-const user_routes = {
-  logistica: [
-    {
-      id: 1,
-      path: "/operativos",
-      desc: "Operativos",
-      category: "logistica",
-      element: "operativos",
-      display: true,
-    },
-    {
-      id: 2,
-      path: "/viajes",
-      desc: "Viajes",
-      category: "logistica",
-      element: "viajes",
-      display: true,
-    },
-    {
-      id: 5,
-      path: "/combustible",
-      desc: "Combustible",
-      category: "logistica",
-      element: "combustible",
-      display: true,
-    },
-  ],
-  personal: [
-    {
-      id: 3,
-      path: "/vehiculos",
-      desc: "Vehiculos",
-      category: "personal",
-      element: "vehiculos",
-      display: true,
-    },
-    {
-      id: 4,
-      path: "/choferes",
-      desc: "Choferes",
-      category: "personal",
-      element: "choferes",
-      display: true,
-    },
-  ],
-};
+import { handleRoutes } from "../app/routes/handleRoutes";
+import { Toast } from "primereact/toast";
 
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
@@ -55,31 +10,48 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(null);
   const [user, setUser] = useState(null);
   const [routes, setRoutes] = useState([]);
+  const [state, setState] = useState(false);
+  const toast = useRef(null);
+  const showToast = () => {
+    toast.current.show({
+      severity: "success",
+      summary: `Bienvenido`,
+      detail: "Inicio de sesión exitoso",
+    });
+  };
   const navigate = useNavigate();
-  //funciones login / logout
   const login = () => {
-    setAuth(true);
+    localStorage.setItem("token", "e564f66fjvas65w7");
+    showToast();
+    setState(!state);
     navigate("/");
   };
   const logout = () => {
-    setAuth(false);
+    localStorage.removeItem("token");
+    setState(!state);
     navigate("/signin");
   };
 
   useEffect(() => {
-    if (auth) {
+    const token = localStorage.getItem("token");
+    if (token) {
       setAuth(true);
-      setUser("Enzo Paez")
-      setRoutes(user_routes);
+      setUser({
+        name: "Enzo",
+        surname: "Paez",
+        role: "Admin",
+      });
+      setRoutes(handleRoutes("Admin"));
     } else {
       setAuth(false);
       setRoutes([]);
     }
-  }, [auth]);
+  }, [state]);
   return (
     <div>
       <AuthContext.Provider value={{ auth, user, routes, login, logout }}>
         {children}
+        <Toast ref={toast} />
       </AuthContext.Provider>
     </div>
   );
