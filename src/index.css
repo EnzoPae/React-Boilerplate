@@ -15,11 +15,29 @@ body {
 
 /* Ajustes clases prime-react */
 .p-card .p-card-content {
+  /*Card*/
   padding: 0.3rem 0 !important;
 }
-
+.buttons td {
+  /*Table td button*/
+  padding: 0.3rem 1rem !important;
+}
+.no-buttons td {
+  /*Table td no buttons*/
+  padding: 0.7rem 1rem !important;
+}
+.p-dialog .p-dialog-header,
+.p-dialog .p-dialog-content {
+  /*Dialog*/
+  padding: 0.8rem 1.5rem 0.5rem 1.5rem !important;
+}
 .p-password .p-password-input {
+  /*Pass input*/
   width: 100% !important;
+}
+.p-datatable .p-component-overlay {
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 700px) {
