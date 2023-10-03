@@ -22,7 +22,7 @@ const ItemsAuth = ({ routes, onClick }) => {
                 onClick={onClick}
               >
                 <li
-                  className={`py-1 pr-1 pl-3 hover:bg-green-50 border-round-right ${
+                  className={`py-1 pr-1 pl-4 hover:bg-green-50 border-round-right ${
                     isActive(r.path) ? "" : ""
                   }`}
                 >
