@@ -4,6 +4,7 @@ import { Column } from "primereact/column";
 import { cellFormater } from "../../functions/cellFormater";
 //Templates
 import HeaderBasic from "./templates/headerBasic";
+import HeaderNoSearch from "./templates/headerNoSearch";
 import HeaderPlus from "./templates/headerPlus";
 
 const Table = ({
@@ -40,6 +41,7 @@ const Table = ({
         headerContent={headerContent}
       />
     ),
+    noSearch: <HeaderNoSearch title={title} subTitle={subTitle} />,
     plus: (
       <HeaderPlus
         title={title}

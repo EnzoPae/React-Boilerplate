@@ -68,6 +68,7 @@ const FormikDate = ({
         disabled={disabled}
         showIcon
         locale="es"
+        dateFormat="dd/mm/yy"
       />
       {meta.touched && meta.error ? (
         <small className="p-error">{meta.error}</small>

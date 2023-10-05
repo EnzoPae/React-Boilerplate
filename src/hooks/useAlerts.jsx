@@ -23,7 +23,22 @@ export const useAlerts = () => {
       sticky: true,
     });
   };
-
+  const showInfo = (msj) => {
+    ref.current.show({
+      severity: "info",
+      summary: "Información",
+      detail: msj ? msj : "",
+      sticky: true,
+    });
+  };
+  const showWarn = (msj) => {
+    ref.current.show({
+      severity: "warn",
+      summary: "Alerta",
+      detail: msj ? msj : "",
+      sticky: true,
+    });
+  };
   const hideContent = (msj, customMsj) => {
     setHideMsj(
       typeof msj.data === "string"
@@ -35,5 +50,14 @@ export const useAlerts = () => {
     setHideState(true);
   };
 
-  return { showSuccess, showError, ref, hideContent, hideState, hideMsj };
+  return {
+    showSuccess,
+    showError,
+    showInfo,
+    showWarn,
+    ref,
+    hideContent,
+    hideState,
+    hideMsj,
+  };
 };
