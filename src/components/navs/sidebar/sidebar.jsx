@@ -1,7 +1,7 @@
 import "./sidebar.css";
 //Items
-import ItemsAuth from "./items/itemsAuth";
 import ItemsNoAuth from "./items/itemsNoAuth";
+import Items from "./items/items";
 //Router
 import { Link } from "react-router-dom";
 //Hooks
@@ -53,7 +53,7 @@ const Sidebar = ({
         {!auth ? (
           <ItemsNoAuth onClick={handleMobileNavigation} />
         ) : (
-          <ItemsAuth routes={routes} onClick={handleMobileNavigation} />
+          <Items routes={routes} onClick={handleMobileNavigation} />
         )}
       </div>
     </div>

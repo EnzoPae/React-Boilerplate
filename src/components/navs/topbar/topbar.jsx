@@ -4,26 +4,13 @@ import { useEffect, useRef } from "react";
 import { useAuth } from "../../../context/authContext";
 //Hooks
 import useScreenSize from "../../../hooks/useScreenSize";
-import { useLocation } from "react-router-dom";
 //Components
 import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
 
-const Topbar = ({ sidebarToggle, setSidebarToggle, auth, user, routes }) => {
+const Topbar = ({ sidebarToggle, setSidebarToggle, auth, user }) => {
   const { logout } = useAuth();
   //current route
-  const location = useLocation();
-  const filteredRoutes = routes.flatMap((cat) => cat.routes);
-  const currentRoute = filteredRoutes.find((r) => r.path === location.pathname);
-  const titleBar = () => {
-    if (!auth || !currentRoute) {
-      return "Terminales y Servicios";
-    } else {
-      const cat =
-        user.role === "Empresa" ? user.company.Name : currentRoute.cat;
-      return `${cat} / ${currentRoute.desc}`;
-    }
-  };
   //items config button
   const menuConfig = useRef(null);
   const items = [
@@ -50,7 +37,7 @@ const Topbar = ({ sidebarToggle, setSidebarToggle, auth, user, routes }) => {
           text
         />
         <p className="ml-3 font-semibold text-primary capitalize">
-          {titleBar()}
+          Terminales y Servicios
         </p>
       </div>
       <div className="mr-2">
