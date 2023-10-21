@@ -9,8 +9,15 @@ export const routesAdmin = [
     ],
   },
   {
-    noDropdown: true,
     cat: "Cat. 2",
+    icon: "pi-user",
+    routes: [
+      { path: "/item/4", desc: "Item 4", comp: "item_4", d: true },
+    ],
+  },
+  {
+    noDropdown: true,
+    cat: "Cat. 3",
     icon: "pi-file-pdf",
     path: "/item/3",
     routes: [
