@@ -9,6 +9,8 @@ const FormikDate = ({
   value,
   onChange,
   disabled,
+  optional,
+  required,
   ...props
 }) => {
   const [field, meta] = useField(props);
@@ -58,7 +60,12 @@ const FormikDate = ({
   });
   return (
     <div className="my-2 flex-1">
-      <Label label={label} tooltip={tooltip} />
+      <Label
+        label={label}
+        tooltip={tooltip}
+        required={required}
+        optional={optional}
+      />
       <Calendar
         {...field}
         {...props}

@@ -1,31 +1,28 @@
 import { useField } from "formik";
-import { InputText } from "primereact/inputtext";
+import { InputTextarea } from 'primereact/inputtextarea';
 import Label from "./label";
 
-const FormikInput = ({
-  placeholder,
+const FormikInputTextArea = ({
   label,
   tooltip,
+  value,
+  onChange,
   disabled,
-  optional,
   required,
+  optional,
   ...props
 }) => {
   const [field, meta] = useField(props);
   return (
     <div className="my-2 flex-1">
-      <Label
-        label={label}
-        tooltip={tooltip}
-        required={required}
-        optional={optional}
-      />
-      <InputText
+      <Label label={label} tooltip={tooltip} required={required} optional={optional}/>
+      <InputTextarea
         {...field}
         {...props}
-        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
         className={`w-full ${meta.touched && meta.error ? "p-invalid" : null}`}
-        disabled={disabled ? true : false}
+        disabled={disabled}
       />
       {meta.touched && meta.error ? (
         <small className="p-error">{meta.error}</small>
@@ -34,4 +31,4 @@ const FormikInput = ({
   );
 };
 
-export default FormikInput;
+export default FormikInputTextArea;

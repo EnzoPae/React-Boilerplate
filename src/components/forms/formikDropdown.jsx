@@ -11,12 +11,19 @@ const FormikDropdown = ({
   optionLabel,
   placeholder,
   disabled,
+  optional,
+  required,
   ...props
 }) => {
   const [field, meta] = useField(props);
   return (
     <div className="my-2 flex-1">
-      <Label label={label} tooltip={tooltip} />
+      <Label
+        label={label}
+        tooltip={tooltip}
+        required={required}
+        optional={optional}
+      />
       <Dropdown
         {...field}
         {...props}
