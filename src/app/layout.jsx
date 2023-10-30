@@ -6,6 +6,8 @@ import HomePage from "./utils/homePage";
 //Auth Pages
 import SignIn from "./auth/signIn";
 import SignUp from "./auth/SignUP";
+import ForgotPass from "./auth/forgotPass";
+import ChangePass from "./auth/changePass";
 //User Pages
 import { COMPONENTS_MAP } from "./routes/components";
 
@@ -22,6 +24,8 @@ const Layout = ({ auth, routes }) => {
           <Route path="*" element={<DefaultPage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot/password" element={<ForgotPass />} />
+          <Route path="/change/password" element={<ChangePass />} />
         </Routes>
       ) : (
         <Routes>

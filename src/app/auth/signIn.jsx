@@ -24,7 +24,7 @@ const SignIn = () => {
   const handleSubmit = async (values) => {
     try {
       login();
-      console.log(values)
+      console.log(values);
     } catch (error) {
       showError(error);
     }
@@ -56,6 +56,11 @@ const SignIn = () => {
               label={"Contraseña"}
               disabled={isSubmitting}
             />
+            <div className="text-xs mb-2">
+              <Link to={"/forgot/password"} className="ml-1 text-primary">
+                ¿Olvidaste tu contraseña?
+              </Link>
+            </div>
             <SendButton label="Ingresar" loading={isSubmitting} />
           </Form>
         )}
